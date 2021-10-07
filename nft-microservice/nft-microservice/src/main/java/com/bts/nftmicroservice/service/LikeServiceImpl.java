@@ -7,6 +7,7 @@ import com.bts.nftmicroservice.repository.LikeRepository;
 import com.bts.nftmicroservice.repository.NftRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class LikeServiceImpl implements LikeService{
     private final LikeRepository likeRepository;
     private final NftRepository nftRepository;
@@ -21,10 +23,13 @@ public class LikeServiceImpl implements LikeService{
     @Override
     public void saveLike(LikeDto likeDto) {
         NFT nft = nftRepository.findById(Long.parseLong(likeDto.getNftId())).get();
+
         Like like = Like.builder()
                 .nft(nft)
                 .userId(Long.parseLong(likeDto.getUserId()))
                 .build();
+
+        nft.getLikes().add(like);
 
         likeRepository.save(like);
     }
@@ -52,7 +57,7 @@ public class LikeServiceImpl implements LikeService{
         NFT nft = nftRepository.findByNftId(Long.parseLong(nftId));
 
         HashMap<String, Integer> result = new HashMap<>();
-        result.put("count",nft.getLikes().size());
+        result.put("count", nft.getLikes().size());
 
         return result;
     }

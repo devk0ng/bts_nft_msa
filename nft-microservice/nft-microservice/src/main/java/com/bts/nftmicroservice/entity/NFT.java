@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,8 +24,17 @@ public class NFT {
     private String image;
     private LocalDateTime date;
     private String imagePath;
+    private Long userId;
 
     @OneToMany(mappedBy = "nft", cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<Like> likes;
+    private List<Like> likes = new ArrayList<>();;
+
+    public void changeOwner(Long newUserId) {
+        this.userId = newUserId;
+    }
+
+    public void updateDate() {
+        date = LocalDateTime.now();
+    }
 
 }
