@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "bts-nft", url = "http://localhost:8080")
+@FeignClient(name = "bts-nft", url = "http://localhost:8080", fallbackFactory = NftFeignClientFallbackFactory.class)
 public interface NftFeignClient {
     @GetMapping("/api/findnft/{nftId}")
     public NftDto findNft(@PathVariable String nftId) throws Exception;

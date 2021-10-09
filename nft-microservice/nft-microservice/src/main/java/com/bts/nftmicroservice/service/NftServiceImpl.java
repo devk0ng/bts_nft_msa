@@ -22,7 +22,6 @@ public class NftServiceImpl implements NftService{
 
     @Override
     public void saveNft(NftDto nftDto) {
-        System.out.println("nftDto = " + nftDto);
 
         NFT nft = NFT.builder().klayId(nftDto.getKlayId())
                 .name(nftDto.getName())
