@@ -1,6 +1,7 @@
 package com.bts.nftmicroservice.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Builder
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class NFT {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +29,8 @@ public class NFT {
     private Long userId;
 
     @OneToMany(mappedBy = "nft", cascade = {CascadeType.ALL}, orphanRemoval = true)
-    private List<Like> likes = new ArrayList<>();;
+    @Builder.Default
+    private List<Like> likes = new ArrayList<>();
 
     public void changeOwner(Long newUserId) {
         this.userId = newUserId;
