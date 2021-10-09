@@ -21,28 +21,4 @@ public class LikeTest {
     @Autowired
     NftService nftService;
 
-    @Test
-    void likeTest() {
-        NftDto nftDto = new NftDto();
-
-        nftDto.setKlayId("12");
-        nftDto.setImage("image1");
-        nftDto.setDescription("des1");
-        nftDto.setImagePath("path1");
-        nftDto.setName("name1");
-        nftDto.setOwner(1L);
-
-        nftService.saveNft(nftDto);
-
-        nftDto = new NftDto();
-
-        nftDto.setKlayId("1234");
-        nftDto.setImage("image2");
-        nftDto.setDescription("des2");
-        nftDto.setImagePath("path2");
-        nftDto.setName("name2");
-        nftDto.setOwner(2L);
-
-        nftService.saveNft(nftDto);
-    }
 }

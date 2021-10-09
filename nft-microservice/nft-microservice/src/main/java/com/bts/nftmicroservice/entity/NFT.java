@@ -1,6 +1,7 @@
 package com.bts.nftmicroservice.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class NFT {
     private Long userId;
 
     @OneToMany(mappedBy = "nft", cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JsonIgnore
     @Builder.Default
     private List<Like> likes = new ArrayList<>();
 

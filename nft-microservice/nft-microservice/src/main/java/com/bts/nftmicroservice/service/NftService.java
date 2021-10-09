@@ -10,7 +10,7 @@ import java.util.List;
 public interface NftService {
     void saveNft(NftDto nftDto);
     List<NFT> findNftByUserId(Long userId);
-    NFT findNftByNftId(String nftId);
+    NftDto findNftByNftId(String nftId);
     List<NFT> findNftAll();
     void moveNft(SendDto sendDto);
     void deleteNft(Long nftId);

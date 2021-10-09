@@ -3,8 +3,10 @@ package com.bts.nftmicroservice.service;
 import com.bts.nftmicroservice.dto.NftDto;
 import com.bts.nftmicroservice.dto.SendDto;
 import com.bts.nftmicroservice.entity.NFT;
+import com.bts.nftmicroservice.mapper.NftMapper;
 import com.bts.nftmicroservice.repository.NftRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,20 +14,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 public class NftServiceImpl implements NftService{
     private final NftRepository nftRepository;
 
     @Override
-    public void saveNft(NftDto nfTDto) {
-        NFT nft = NFT.builder().klayId(nfTDto.getKlayId())
-                .name(nfTDto.getName())
+    public void saveNft(NftDto nftDto) {
+        System.out.println("nftDto = " + nftDto);
+
+        NFT nft = NFT.builder().klayId(nftDto.getKlayId())
+                .name(nftDto.getName())
                 .date(LocalDateTime.now())
-                .description(nfTDto.getDescription())
-                .image(nfTDto.getImage())
-                .userId(nfTDto.getOwner())
-                .imagePath(nfTDto.getImagePath())
+                .description(nftDto.getDescription())
+                .image(nftDto.getImage())
+                .userId(nftDto.getUserId())
+                .imagePath(nftDto.getImagePath())
                 .build();
 
         nftRepository.save(nft);
@@ -37,8 +42,11 @@ public class NftServiceImpl implements NftService{
     }
 
     @Override
-    public NFT findNftByNftId(String nftId) {
-        return nftRepository.findById(Long.parseLong(nftId)).get();
+    public NftDto findNftByNftId(String nftId) {
+        NFT nft = nftRepository.findById(Long.parseLong(nftId)).get();
+        NftDto nftDto = NftMapper.INSTANCE.toNftDto(nft);
+
+        return nftDto;
     }
 
     @Override

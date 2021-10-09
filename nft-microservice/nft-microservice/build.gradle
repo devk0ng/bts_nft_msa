@@ -21,6 +21,9 @@ repositories {
 dependencies {
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
 
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
