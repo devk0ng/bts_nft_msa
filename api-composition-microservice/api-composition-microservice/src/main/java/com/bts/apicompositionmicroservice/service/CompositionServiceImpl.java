@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 public class CompositionServiceImpl implements CompositionService{
     private final NftFeignClient nftFeignClient;
     @Override
-    public NftDto findNftByNftId(String nftId) {
-
+    public NftDto findNftByNftId(String nftId) throws Exception{
         return nftFeignClient.findNft(nftId);
     }
 }

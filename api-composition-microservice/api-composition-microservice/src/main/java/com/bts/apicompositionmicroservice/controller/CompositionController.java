@@ -13,7 +13,7 @@ public class CompositionController {
     private final CompositionService compositionService;
 
     @GetMapping("findnft/{nftId}")
-    public NftDto findNft(@PathVariable String nftId) {
+    public NftDto findNft(@PathVariable String nftId) throws Exception {
         return compositionService.findNftByNftId(nftId);
     }
 }
